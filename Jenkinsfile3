@@ -55,7 +55,10 @@ spec:
         script {
           env.IMAGE_TAG = sh(
             returnStdout: true,
-            script: 'git rev-parse --short=7 HEAD'
+            script: '''
+		git config --global --add safe.directory /home/jenkins/agent/workspace/spring-petclinic
+		git rev-parse --short=7 HEAD
+		'''
           ).trim()
           echo "Image tag : ${env.IMAGE_TAG}"
         }
